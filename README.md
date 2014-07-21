@@ -1,4 +1,4 @@
-Text-Classifier
+Machine Learning Text-Classifier
 ===============
 
 Classify a sentence into a category using Naive Bayes Algorithm.
