@@ -20,9 +20,9 @@ import weka.filters.unsupervised.attribute.StringToWordVector;
         
         public static void main(String[] args) {
         	System.setProperty( "file.encoding", "UTF-8" );
-        	String football = "Location to footsimp.txt";
+        	String football = "Location to football.txt";
         	String cinema = "Location to cinema.txt";
-        	String voiture = "Location to voitureSimp.txt"; 
+        	String voiture = "Location to voiture.txt"; 
         	String voyage = "Location to voyage.txt";
             try {
                 TextClassifier cl = new TextClassifier(new NaiveBayesMultinomialUpdateable());
