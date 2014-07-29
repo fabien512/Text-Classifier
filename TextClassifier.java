@@ -15,32 +15,43 @@ import weka.filters.unsupervised.attribute.StringToWordVector;
     
     public class TextClassifier implements Serializable {
 
+    	
+    	
         private static final long serialVersionUID = -1397598966481635120L;
-        
-        
         public static void main(String[] args) {
         	System.setProperty( "file.encoding", "UTF-8" );
-        	String football = "Location to football.txt";
-        	String cinema = "Location to cinema.txt";
-        	String voiture = "Location to voiture.txt"; 
-        	String voyage = "Location to voyage.txt";
+        	String football = "C:\\Users\\FGHRENAS\\Desktop\\CentreInterets\\footballSimp.txt";
+        	String cinema = "C:\\Users\\FGHRENAS\\Desktop\\CentreInterets\\cinema.txt";
+        	String voiture = "C:\\Users\\FGHRENAS\\Desktop\\CentreInterets\\voitureSimp.txt"; 
+        	String voyage = "C:\\Users\\FGHRENAS\\Desktop\\CentreInterets\\voyage.txt";
+        	String informatique = "C:\\Users\\FGHRENAS\\Desktop\\CentreInterets\\informatique.txt";
+        	String restaurant = "C:\\Users\\FGHRENAS\\Desktop\\CentreInterets\\restaurant.txt";
+        	
             try {
                 TextClassifier cl = new TextClassifier(new NaiveBayesMultinomialUpdateable());
                 cl.addCategory("football");
                 cl.addCategory("cinema");
                 cl.addCategory("voiture");
                 cl.addCategory("voyage");
+                cl.addCategory("informatique");
+                cl.addCategory("restaurant");
                 cl.setupAfterCategorysAdded();
 
                 //
                 BufferedReader buff = new BufferedReader(new FileReader(football));	
                 BufferedReader buff2 = new BufferedReader(new FileReader(cinema));	
                 BufferedReader buff3 = new BufferedReader(new FileReader(voiture));	
-                BufferedReader buff4 = new BufferedReader(new FileReader(voyage));	
+                BufferedReader buff4 = new BufferedReader(new FileReader(voyage));
+                BufferedReader buff5 = new BufferedReader(new FileReader(informatique));	
+                BufferedReader buff6 = new BufferedReader(new FileReader(restaurant));	
 				String line;
 				String line2;
 				String line3;
 				String line4;
+				String line5;
+				String line6;
+				String mot = "ballon";
+				double limit = 0.85;
 				
 				while ((line = buff.readLine()) != null) {
 					cl.addData(line, "football");
@@ -54,10 +65,41 @@ import weka.filters.unsupervised.attribute.StringToWordVector;
 				while ((line4 = buff4.readLine()) != null) {
 					cl.addData(line4, "voyage");
 				}
+				while ((line5 = buff5.readLine()) != null) {
+					cl.addData(line5, "informatique");
+				}
+				while ((line6 = buff6.readLine()) != null) {
+					cl.addData(line6, "restaurant");
+				}
 
-
-                result = cl.classifyMessage("Your text HERE");
-                System.out.println("====== RESULT ======\tCLASSIFIED AS:\t" + Arrays.toString(result));
+                double[] result = cl.classifyMessage(mot);
+                for (int i=0;i<result.length;i++) {
+                	if (result[i] > limit) {
+                		switch(i)
+                		{
+                		case 0:
+                			cl.addData(mot,"football");
+                			break;
+                		case 1:
+                    		cl.addData(mot,"cinema");
+                    		break;
+                		case 2:
+                    		cl.addData(mot,"voiture");
+                    		break;
+                		case 3:
+                    		cl.addData(mot,"voyage");
+                    		break;
+                		case 4:
+                    		cl.addData(mot,"informatique");
+                    		break;
+                		case 5:
+                    		cl.addData(mot,"restaurant");
+                    		break;
+                		}
+                	}
+                }
+                result = cl.classifyMessage(mot);
+                System.out.println(mot+" : " + Arrays.toString(result));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -77,10 +119,7 @@ import weka.filters.unsupervised.attribute.StringToWordVector;
         public TextClassifier(Classifier classifier) throws FileNotFoundException {
             this(classifier, 10);
         }
-        
-        
-        //Constructor of text classifier
-        
+
         public TextClassifier(Classifier classifier, int startSize) throws FileNotFoundException {
             this.filter = new StringToWordVector();
             this.classifier = classifier;
@@ -94,7 +133,6 @@ import weka.filters.unsupervised.attribute.StringToWordVector;
 
         }
 
-        //Function to add another category 
         public void addCategory(String category) {
             category = category.toLowerCase();
             // if required, double the capacity.
@@ -105,9 +143,6 @@ import weka.filters.unsupervised.attribute.StringToWordVector;
             classValues.addElement(category);
         }
 
-
-        //Add data into the different categories
-        
         public void addData(String message, String classValue) throws IllegalStateException {
             if (!setup) {
                 throw new IllegalStateException("Must use setup first");
@@ -139,8 +174,6 @@ import weka.filters.unsupervised.attribute.StringToWordVector;
             }
         }
 
-
-        // Classify the different messages
         public double[] classifyMessage(String message) throws Exception {
             message = message.toLowerCase();
             if (!setup) {
