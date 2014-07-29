@@ -1,10 +1,10 @@
- import java.io.BufferedReader;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Serializable;
 import java.util.Arrays;
 
-    import weka.classifiers.Classifier;
+import weka.classifiers.Classifier;
 import weka.classifiers.bayes.NaiveBayesMultinomialUpdateable;
 import weka.core.Attribute;
 import weka.core.FastVector;
