@@ -13,16 +13,20 @@ Initialization
 To initialize the training set, I use Wikipedia database.
 
 First Step :
+===============
 Go to http://dumps.wikimedia.org/frwiki/ and download the latest alltitles.gz
 
 Second Step : 
+===============
 Use some regex on the text :
 Remove all ? : .*[\?].*
 
 Third Step :
+===============
 Remove the text before the articles names. The code in Wikipedia/RemoveNames.java works for the file frwiki-20140716-all-titles.gz.
 
 Fourth Step :
+===============
 Execute the code in Wikipedia/GetCategorie.java to associate to each article name the wikipedia category which is assigned.
 
 
