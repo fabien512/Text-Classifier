@@ -24,7 +24,7 @@ public class RemoveNames {
 				FileWriter fw = new FileWriter(filePath2,true);
 				BufferedWriter output = new BufferedWriter(fw);
 				i++;
-				//System.out.println(i);
+				
 				if (i<6324) {
 					output.write(line+ "\n");
 					output.flush();
@@ -32,37 +32,32 @@ public class RemoveNames {
 				}
 				if (i>=6324 && i<=23400) {
 				output.write(line.substring(15,line.length())+ "\n");
-				//output.write(line.toLowerCase().replaceAll("\\?", " ").replaceAll("à", "a")
 				output.flush();
 				output.close();
 				}
 				if (i>=23401 && i<=53181) {
 					output.write(line.substring(16,line.length())+ "\n");
-					//output.write(line.toLowerCase().replaceAll("\\?", " ").replaceAll("à", "a")
 					output.flush();
 					output.close();
 					}
 				if (i>=53182 && i<=525133) {
 					output.write(line.substring(17,line.length())+ "\n");
-					//output.write(line.toLowerCase().replaceAll("\\?", " ").replaceAll("à", "a")
 					output.flush();
 					output.close();
 					}
 				if (i>=525134 && i<=683000) {
 					output.write(line.substring(18,line.length())+ "\n");
-					//output.write(line.toLowerCase().replaceAll("\\?", " ").replaceAll("à", "a")
 					output.flush();
 					output.close();
 					}
 				if (i>=683001 && i<=3489028) {
 					output.write(line.substring(19,line.length())+ "\n");
-					//output.write(line.toLowerCase().replaceAll("\\?", " ").replaceAll("à", "a")
 					output.flush();
 					output.close();
 					}
 			}
 		}	catch (IOException ioe) {
-			// erreur de fermeture des flux	
+			// Error closing file
 				System.out.println("Erreur --" + ioe.toString());
 			}
 	}
