@@ -20,6 +20,7 @@ Second Step
 ===============
 Use some regex on the text :
 Remove all ? : .*[\?].*
+Remove all & : .*[\&].*
 Remove all categorie title : .*(catégorie).*
 
 Third Step 
