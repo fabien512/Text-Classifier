@@ -8,6 +8,7 @@ You need to add the jar weka.jar for the implementation of this algorithm.
 
 
 Initialization
+===============
 
 To initialize the training set, I use Wikipedia database.
 
